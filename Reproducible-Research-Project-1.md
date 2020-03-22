@@ -69,9 +69,10 @@ head(Total_Steps, 10)
 
 
 ```r
-ggplot(Total_Steps, aes(x = steps)) +
+plot_1 <- ggplot(Total_Steps, aes(x = steps)) +
     geom_histogram( binwidth = 1000) +
     labs(title = "Daily Steps", x = "Steps", y = "Frequency")
+print(plot_1)
 ```
 
 ```
@@ -99,7 +100,8 @@ Total_Steps[, .(Mean_Steps = mean(steps, na.rm = TRUE), Median_Steps = median(st
 ```r
 IntervalDT <- activityData[, c(lapply(.SD, mean, na.rm = TRUE)), .SDcols = c("steps"), by = .(interval)] 
 
-ggplot(IntervalDT, aes(x = interval , y = steps)) + geom_line(color="blue", size=1) + labs(title = "Avg. Daily Steps", x = "Interval", y = "Avg. Steps per day")
+plot_2 <- ggplot(IntervalDT, aes(x = interval , y = steps)) + geom_line(color="blue", size=1) + labs(title = "Avg. Daily Steps", x = "Interval", y = "Avg. Steps per day")
+print(plot_2)
 ```
 
 ![](Reproducible-Research-Project-1_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
@@ -159,7 +161,8 @@ Total_Steps[, .(Mean_Steps = mean(steps), Median_Steps = median(steps))]
 ```
 
 ```r
-ggplot(Total_Steps, aes(x = steps)) + geom_histogram( binwidth = 1000) + labs(title = "Daily Steps", x = "Steps", y = "Frequency")
+plot_3 <- ggplot(Total_Steps, aes(x = steps)) + geom_histogram( binwidth = 1000) + labs(title = "Daily Steps", x = "Steps", y = "Frequency")
+print(plot_3)
 ```
 
 ![](Reproducible-Research-Project-1_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
@@ -205,7 +208,8 @@ head(activityData, 10)
 activityData[is.na(steps), "steps"] <- activityData[, c(lapply(.SD, median, na.rm = TRUE)), .SDcols = c("steps")]
 IntervalDT <- activityData[, c(lapply(.SD, mean, na.rm = TRUE)), .SDcols = c("steps"), by = .(interval, `weekday or weekend`)] 
 
-ggplot(IntervalDT , aes(x = interval , y = steps, color=`weekday or weekend`)) + geom_line() + labs(title = "Avg. Daily Steps by Weektype", x = "Interval", y = "No. of Steps") + facet_wrap(~`weekday or weekend` , ncol = 1, nrow=2)
+plot_4 <- ggplot(IntervalDT , aes(x = interval , y = steps, color=`weekday or weekend`)) + geom_line() + labs(title = "Avg. Daily Steps by Weektype", x = "Interval", y = "No. of Steps") + facet_wrap(~`weekday or weekend` , ncol = 1, nrow=2)
+print(plot_4)
 ```
 
 ![](Reproducible-Research-Project-1_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
